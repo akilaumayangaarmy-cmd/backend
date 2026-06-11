@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -17,11 +19,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       port: +configService.get('DB_PORT'),
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
-      database: 'test',
-      entities: [],
+      database: configService.get<string>('DB_NAME'),
+      entities: [User],
       synchronize: true,
     }),
-  })
+  }),
+  UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
