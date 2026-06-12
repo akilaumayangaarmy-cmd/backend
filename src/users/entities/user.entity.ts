@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Appointment } from "src/appointments/entities/appointment.entity";
 
 @Entity()
 export class User {
@@ -65,5 +66,8 @@ export class User {
         default: () => 'CURRENT_TIMESTAMP'
     })
     updatedAt: Date
+
+    @OneToMany(() => Appointment, (appointment) => appointment.user)
+    appointments: Appointment[]
 
 }
