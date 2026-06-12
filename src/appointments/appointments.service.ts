@@ -17,30 +17,30 @@ export class AppointmentsService {
     return await this.appointmentRepository.save(appointment);
   }
 
-  async findAll() {
-    return await this.appointmentRepository.find({ relations: ['user'] });
-  }
+//   async findAll() {
+//     return await this.appointmentRepository.find({ relations: ['user'] });
+//   }
 
-  async findOne(id: string) {
-    return await this.appointmentRepository.findOne({
-      where: { id },
-      relations: ['user'],
-    });
-  }
+//   async findOne(id: string) {
+//     return await this.appointmentRepository.findOne({
+//       where: { id },
+//       relations: ['user'],
+//     });
+//   }
 
-  async findByUserId(userId: string) {
-    return await this.appointmentRepository.find({
-      where: { userId },
-      relations: ['user'],
-    });
-  }
+//   async findByUserId(userId: string) {
+//     return await this.appointmentRepository.find({
+//       where: { userId },
+//       relations: ['user'],
+//     });
+//   }
 
-  async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
-    await this.appointmentRepository.update(id, updateAppointmentDto);
-    return await this.findOne(id);
-  }
+//   async update(id: string, updateAppointmentDto: UpdateAppointmentDto) {
+//     await this.appointmentRepository.update(id, updateAppointmentDto);
+//     return await this.findOne(id);
+//   }
 
-  async remove(id: string) {
-    return await this.appointmentRepository.delete(id);
-  }
+//   async remove(id: string) {
+//     return await this.appointmentRepository.delete(id);
+//   }
 }

@@ -12,31 +12,31 @@ export class AppointmentsController {
     return this.appointmentsService.create(createAppointmentDto);
   }
 
-  @Get()
-  findAll() {
-    return this.appointmentsService.findAll();
-  }
+//   @Get()
+//   findAll() {
+//     return this.appointmentsService.findAll();
+//   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.appointmentsService.findOne(id);
-  }
+//   @Get(':id')
+//   findOne(@Param('id') id: string) {
+//     return this.appointmentsService.findOne(id);
+//   }
 
-  @Get('user/:userId')
-  findByUserId(@Param('userId') userId: string) {
-    return this.appointmentsService.findByUserId(userId);
-  }
+//   @Get('user/:userId')
+//   findByUserId(@Param('userId') userId: string) {
+//     return this.appointmentsService.findByUserId(userId);
+//   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateAppointmentDto: UpdateAppointmentDto,
-  ) {
-    return this.appointmentsService.update(id, updateAppointmentDto);
-  }
+//   @Patch(':id')
+//   update(
+//     @Param('id') id: string,
+//     @Body() updateAppointmentDto: UpdateAppointmentDto,
+//   ) {
+//     return this.appointmentsService.update(id, updateAppointmentDto);
+//   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.appointmentsService.remove(id);
-  }
+//   @Delete(':id')
+//   remove(@Param('id') id: string) {
+//     return this.appointmentsService.remove(id);
+//   }
 }
