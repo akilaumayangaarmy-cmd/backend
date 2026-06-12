@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { AuthModule } from './auth/auth.module';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
+import { AppoinmentModule } from './appoinment/appoinment.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
@@ -28,7 +29,8 @@ import { JwtAuthGuard } from './auth/jwt-auth.guard';
     }),
   }),
   UsersModule,
-  AuthModule
+  AuthModule,
+  AppoinmentModule
   ],
   controllers: [AppController],
   providers: [
