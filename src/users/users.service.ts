@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { RegisterDto } from 'src/auth/dto/register-dto';
 
 @Injectable()
 export class UsersService {
@@ -19,7 +20,7 @@ export class UsersService {
     if (checkEmail) {
       throw new ConflictException('Email already exists');
     }
-    const checkNic = await this.userRepository.findOne({ where: { nic: createUserDto.nic } });
+    const checkNic = await this.findByNic(createUserDto.nic);
 
     if (checkNic) {
       throw new ConflictException('NIC already exists');
@@ -28,7 +29,9 @@ export class UsersService {
     return await this.userRepository.save(createUserDto);
   }
 
-
+  async registerUser(registerDto: RegisterDto) {
+    return await this.userRepository.save(registerDto);
+  }
 
   async findAll() {
     return await this.userRepository.find();
@@ -36,6 +39,10 @@ export class UsersService {
 
   async findByEmail(email: string) {
     return await this.userRepository.findOne({ where: { email: email } });
+  }
+
+  async findByNic(nic: string) {
+    return await this.userRepository.findOne({ where: { nic: nic } });
   }
 
   findOne(id: number) {
