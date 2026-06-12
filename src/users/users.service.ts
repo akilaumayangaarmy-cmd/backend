@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { RegisterDto } from 'src/auth/dto/register-dto';
+import bcrypt from 'node_modules/bcryptjs';
 
 @Injectable()
 export class UsersService {
@@ -25,6 +26,9 @@ export class UsersService {
     if (checkNic) {
       throw new ConflictException('NIC already exists');
     }
+
+    const hashPassword = await bcrypt.hash(createUserDto.password, 10);
+    createUserDto.password = hashPassword;
 
     return await this.userRepository.save(createUserDto);
   }
