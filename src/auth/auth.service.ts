@@ -3,10 +3,13 @@ import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from './dto/register-dto';
 import { User } from 'src/users/entities/user.entity';
 import bcrypt from 'node_modules/bcryptjs';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly userService: UsersService) { }
+    constructor(private readonly userService: UsersService,
+        private jwtService: JwtService
+    ) { }
 
     async validateUser(email: string, password: string): Promise<User | null> {
 
@@ -41,6 +44,15 @@ export class AuthService {
         registerDto.password = hashPassword;
 
         return await this.userService.registerUser(registerDto);
+    }
+
+    async login(user: User) {
+
+        const payload = { username: user.email, sub: user.id };
+
+        return {
+            access_token: this.jwtService.sign(payload),
+        };
     }
 
 }
